@@ -20,11 +20,12 @@ function isActiveMenu($key) {
   <script src="./assets/js/popper.js"></script>
   <script src="./assets/js/boostrap.bundle.min.js"></script>
   <script src="./assets/js/boostrap.min.js"></script>
+  <script src="./assets/js/main.js"></script>
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 <body>
-  <nav class="navbar sticky-top navbar-light bg-light">
+  <nav class="navbar fixed-top navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand">SPK - Panca Bhuana</a>
       <form action="<?= $app_root ?>/actions/auth/logout.php" method="POST" class="d-flex">
@@ -32,7 +33,7 @@ function isActiveMenu($key) {
       </form>
     </div>
   </nav>
-  <div class="d-flex">
+  <div class="d-flex" style="margin-top: 48px;">
     <div style="width: 290px;">
       <div class="card" style="position: fixed; height: 100%; width: 240px;">
         <div class="card-body">

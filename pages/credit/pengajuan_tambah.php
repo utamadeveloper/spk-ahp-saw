@@ -2,7 +2,7 @@
   include "./middleware/credit.php";
 ?>
 
-<form method="POST">
+<form action="<?= $app_root ?>/actions/pengajuan/tambah.php" method="POST">
   <div class="card">
     <div class="card-header p-3">
       <div class="text-center fw-bolder h5 mb-0">
@@ -18,16 +18,27 @@
         <input type="text" name="nama" class="form-control">
       </div>
       <div class="mb-3">
-        <label class="form-label">Nomor HP</label>
-        <input type="text" name="nohp" class="form-control">
+        <label class="form-label">Jenis Kelamin</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="jk" value="1" checked>
+          <label class="form-check-label">
+            Pria
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="jk" value="2">
+          <label class="form-check-label">
+            Wanita
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nomor HP (+62)</label>
+        <input type="number" name="nohp" class="form-control">
       </div>
       <div class="mb-3">
         <label class="form-label">Alamat</label>
-        <input type="text" name="alamat" class="form-control">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Jenis Kelamin</label>
-        <input type="text" name="jeniskelamin" class="form-control">
+        <textarea name="alamat" class="form-control" rows="3"></textarea>
       </div>
       <div class="mb-3">
         <label class="form-label">Pekerjaan</label>
@@ -35,7 +46,14 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Tempat/Tanggal Lahir</label>
-        <input type="text" name="ttl" class="form-control">
+        <div class="row">
+          <div class="col-4">
+            <input type="text" name="tmptlahir" class="form-control">
+          </div>
+          <div class="col-8">
+            <input type="date" name="tgllahir" class="form-control">
+          </div>
+        </div>
       </div>
 
       <div class="fw-bolder h6 mt-5">
