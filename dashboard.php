@@ -3,6 +3,11 @@ include "./config/database.php";
 include "./config/global.php";
 include "./middleware/auth.php";
 
+function isActiveMenu($key) {
+  $page = $_GET["page"] ?? "";
+  return in_array($key, explode("-", $page)) ? "btn-primary" : "btn-light";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,44 +32,43 @@ include "./middleware/auth.php";
       </form>
     </div>
   </nav>
-  <div style="overflow: hidden; height: 100%;">
-    <div class="d-flex" style="height: 100%;">
-      <div class="" style="width: 290px;">
-        <div class="card" style="position:fixed; height: 100%; width: 240px;">
-          <div class="card-body">
-            <a href="<?= $app_root ?>/dashboard.php?page=home" class="<?= $_GET["page"] == "home" ? "btn-primary" : "btn-light" ?> btn btn-block mb-2" style="width: 100%;">Beranda</a>
-            <a href="<?= $app_root ?>/dashboard.php?page=analis" class="<?= $_GET["page"] == "analis" ? "btn-primary" : "btn-light" ?> btn btn-block mb-2" style="width: 100%;">Data Analis</a>
-            <a href="<?= $app_root ?>/dashboard.php?page=pengajuan" class="<?= $_GET["page"] == "pengajuan" ? "btn-primary" : "btn-light" ?> btn btn-block mb-2" style="width: 100%;">Data Pengajuan</a>
-          </div>
+  <div class="d-flex">
+    <div style="width: 290px;">
+      <div class="card" style="position: fixed; height: 100%; width: 240px;">
+        <div class="card-body">
+          <a href="<?= $app_root ?>/dashboard.php?page=home" class="<?= isActiveMenu("home") ?> btn btn-block mb-2" style="width: 100%;">Beranda</a>
+          <a href="<?= $app_root ?>/dashboard.php?page=analis" class="<?= isActiveMenu("analis") ?> btn btn-block mb-2" style="width: 100%;">Data Analis</a>
+          <a href="<?= $app_root ?>/dashboard.php?page=pengajuan" class="<?= isActiveMenu("pengajuan") ?> btn btn-block mb-2" style="width: 100%;">Data Pengajuan</a>
         </div>
       </div>
-      <div class="" style="width: 100%;">
-        <div class="p-4">
-        <?php
-          $q_page = $_GET["page"] ?? null;
-  
-          switch ($q_page) {
-            case 'home':
-              if ($auth["tipe"] == 1) {
-                include "./pages/credit/home.php";
-              }
-              if ($auth["tipe"] == 2) {
-                include "./pages/manajer/home.php";
-              }
-              break;
-            
-            case 'pengajuan':
-              if ($auth["tipe"] == 1) {
-                include "./pages/credit/pengajuan.php";
-              }
-              break;
-            
-            default:
-              # code...
-              break;
-          }
-        ?>
-        </div>
+    </div>
+    <div class="" style="width: 100%">
+      <div class="p-4">
+      <?php
+        $q_page = $_GET["page"] ?? null;
+
+        switch ($q_page) {
+          case 'home':
+            if ($auth["tipe"] == 1) {
+              include "./pages/credit/home.php";
+            }
+            if ($auth["tipe"] == 2) {
+              include "./pages/manajer/home.php";
+            }
+            break;
+          
+          case 'pengajuan':
+            include "./pages/credit/pengajuan.php";
+            break;
+          case 'pengajuan-tambah':
+            include "./pages/credit/pengajuan_tambah.php";
+            break;
+          
+          default:
+            # code...
+            break;
+        }
+      ?>
       </div>
     </div>
   </div>
