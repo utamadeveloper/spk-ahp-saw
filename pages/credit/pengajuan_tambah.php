@@ -2,6 +2,12 @@
   include "./middleware/credit.php";
 ?>
 
+<?php if ($_SESSION["error"]) { ?>
+<div class="alert alert-danger" role="alert">
+  <?= $_SESSION["error"] ?>
+</div>
+<?php } ?>
+
 <form action="<?= $app_root ?>/actions/pengajuan/tambah.php" method="POST">
   <div class="card">
     <div class="card-header p-3">
@@ -61,27 +67,27 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Kemampuan</label>
-        <input type="text" name="kemampuan" class="form-control">
+        <input type="number" name="kemampuan" class="form-control">
       </div>
       <div class="mb-3">
         <label class="form-label">Nilai Jaminan</label>
-        <input type="text" name="njaminan" class="form-control">
+        <input type="number" name="njaminan" class="form-control">
       </div>
       <div class="mb-3">
         <label class="form-label">Pinjaman</label>
-        <input type="text" name="pinjaman" class="form-control">
+        <input type="number" name="pinjaman" class="form-control">
       </div>
       <div class="mb-3">
         <label class="form-label">Karakter</label>
-        <input type="text" name="karakter" class="form-control">
+        <input type="number" name="karakter" class="form-control">
       </div>
       <div class="mb-3">
         <label class="form-label">Jangka Waktu</label>
-        <input type="text" name="jangkawaktu" class="form-control">
+        <input type="number" name="jangkawkt" class="form-control">
       </div>
       <div class="mb-3">
         <label class="form-label">Jenis Kredit</label>
-        <input type="text" name="ttl" class="form-control">
+        <input type="number" name="jnskredit" class="form-control">
       </div>
     </div>
     <div class="card-footer d-flex justify-content-end">
