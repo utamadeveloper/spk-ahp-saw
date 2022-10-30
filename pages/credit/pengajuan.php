@@ -20,7 +20,7 @@
 </div>
 
 <div class="table-responsive bg-white mt-4">
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th class="text-start">Tanggal</th>
