@@ -28,7 +28,7 @@ function isActiveMenu($key) {
   <nav class="navbar fixed-top navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand">SPK - Panca Bhuana</a>
-      <form action="<?= $app_root ?>/actions/auth/logout.php" method="POST" class="d-flex">
+      <form action="<?=$app_root?>/actions/auth/logout.php" method="POST" class="d-flex">
         <button class="btn btn-primary px-3" onclick="return confirm('Yakin ingin logout?');" type="submit">Logout</button>
       </form>
     </div>
@@ -37,9 +37,9 @@ function isActiveMenu($key) {
     <div style="width: 290px;">
       <div class="card" style="position: fixed; height: 100%; width: 240px;">
         <div class="card-body">
-          <a href="<?= $app_root ?>/dashboard.php?page=home" class="<?= isActiveMenu("home") ?> btn btn-block mb-2" style="width: 100%;">Beranda</a>
-          <a href="<?= $app_root ?>/dashboard.php?page=analis" class="<?= isActiveMenu("analis") ?> btn btn-block mb-2" style="width: 100%;">Data Analis</a>
-          <a href="<?= $app_root ?>/dashboard.php?page=pengajuan" class="<?= isActiveMenu("pengajuan") ?> btn btn-block mb-2" style="width: 100%;">Data Pengajuan</a>
+          <a href="<?=$app_root?>/dashboard.php?page=home" class="<?= isActiveMenu("home") ?> btn btn-block mb-2" style="width: 100%;">Beranda</a>
+          <a href="<?=$app_root?>/dashboard.php?page=analis" class="<?= isActiveMenu("analis") ?> btn btn-block mb-2" style="width: 100%;">Data Analis</a>
+          <a href="<?=$app_root?>/dashboard.php?page=pengajuan" class="<?= isActiveMenu("pengajuan") ?> btn btn-block mb-2" style="width: 100%;">Data Pengajuan</a>
         </div>
       </div>
     </div>
@@ -63,6 +63,12 @@ function isActiveMenu($key) {
             break;
           case 'pengajuan-tambah':
             include "./pages/credit/pengajuan_tambah.php";
+            break;
+          case 'pengajuan-edit':
+            include "./pages/credit/pengajuan_edit.php";
+            break;
+          case 'pengajuan-detail':
+            include "./pages/credit/pengajuan_detail.php";
             break;
           
           default:

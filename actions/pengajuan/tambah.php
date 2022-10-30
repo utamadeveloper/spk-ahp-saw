@@ -2,7 +2,7 @@
 include "../../config/global.php";
 include "../../config/database.php";
 
-$in_nama = $_POST["nama"];
+$in_nmnasabah = $_POST["nmnasabah"];
 $in_jk = $_POST["jk"];
 $in_pekerjaan = $_POST["pekerjaan"];
 $in_tmptlahir = $_POST["tmptlahir"];
@@ -23,7 +23,7 @@ $q_nasabah = "
   )
   VALUES
   (
-    '$in_nama',
+    '$in_nmnasabah',
     '$in_jk',
     '$in_pekerjaan',
     '$in_tmptlahir',

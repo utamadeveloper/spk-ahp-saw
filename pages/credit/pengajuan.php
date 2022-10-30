@@ -15,7 +15,7 @@
     <input value="<?=$_GET['cari']??''?>" type="text" name="cari" class="form-control" placeholder="Cari...">
   </form>
   <div class="col-2">
-    <a href="<?= $app_root ?>/dashboard.php?page=pengajuan-tambah" class="btn btn-primary px-3">Tambah Pengajuan</a>
+    <a href="<?=$app_root?>/dashboard.php?page=pengajuan-tambah" class="btn btn-primary px-3">Tambah Pengajuan</a>
   </div>
 </div>
 
@@ -32,7 +32,9 @@
     </thead>
     <tbody>
       <?php
+        $row_len = 0;
         while($row = $stmt_tabel->fetch_assoc()) {
+          $row_len++;
       ?>
       <tr>
         <th class="text-start"><?=$row["tglpengajuan"]?></th>
@@ -40,15 +42,26 @@
         <td class="text-start"><?=$row["nmnasabah"]?></td>
         <td class="text-end"><?=number_format($row["pinjaman"],0,",",".")?></td>
         <td class="d-flex align-items-center justify-content-center">
-          <a class="btn btn-primary mx-1">
-            Detail
+          <a href="<?=$app_root?>/dashboard.php?page=pengajuan-edit&idpengajuan=<?=$row['idpengajuan']?>" class="btn btn-warning mx-1">
+            Edit
           </a>
-          <form action="<?= $app_root ?>/actions/pengajuan/hapus.php" method="POST">
+          <form action="<?=$app_root?>/actions/pengajuan/hapus.php" method="POST">
             <input type="hidden" name="idpengajuan" value="<?=$row['idpengajuan']?>">
             <button type="submit" class="btn btn-danger mx-1" onclick="return confirm('Apakah anda yakin ingin mengghapus?')">
               Hapus
             </button>
           </form>
+        </td>
+      </tr>
+      <?php
+        }
+      ?>
+      <?php
+        if ($row_len == 0) {
+      ?>
+      <tr>
+        <td colspan="5" class="text-center">
+          Kosong
         </td>
       </tr>
       <?php
