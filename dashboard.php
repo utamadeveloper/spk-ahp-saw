@@ -5,9 +5,22 @@ include "./middleware/auth.php";
 
 function isActiveMenu($key) {
   $page = $_GET["page"] ?? "";
-  return in_array($key, explode("-", $page)) ? "btn-primary" : "btn-light";
+  return in_array($key, explode("-", $page)) ? "active text-white" : "text-dark";
 }
-
+function isActiveSubMenu($keys) {
+  $page = $_GET["page"] ?? "";
+  $is_active = false;
+  foreach ($keys as $key) {
+    if (in_array($key, explode("-", $page))) {
+      return "text-primary";
+      $is_active = true;
+      break;
+    }
+  }
+  if ($is_active === false) {
+    return "text-dark";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +29,6 @@ function isActiveMenu($key) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistem Pendukung Keputusan</title>
-  <script src="./assets/js/jquery.min.js"></script>
-  <script src="./assets/js/popper.js"></script>
-  <script src="./assets/js/boostrap.bundle.min.js"></script>
-  <script src="./assets/js/boostrap.min.js"></script>
-  <script src="./assets/js/main.js"></script>
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/main.css">
 </head>
@@ -37,9 +45,37 @@ function isActiveMenu($key) {
     <div style="width: 290px;">
       <div class="card" style="position: fixed; height: 100%; width: 240px;">
         <div class="card-body">
-          <a href="<?=$app_root?>/dashboard.php?page=home" class="<?= isActiveMenu("home") ?> btn btn-block mb-2" style="width: 100%;">Beranda</a>
-          <a href="<?=$app_root?>/dashboard.php?page=analis" class="<?= isActiveMenu("analis") ?> btn btn-block mb-2" style="width: 100%;">Data Analis</a>
-          <a href="<?=$app_root?>/dashboard.php?page=pengajuan" class="<?= isActiveMenu("pengajuan") ?> btn btn-block mb-2" style="width: 100%;">Data Pengajuan</a>
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+              <a href="<?=$app_root?>/dashboard.php?page=home" class="<?=isActiveMenu("home")?> nav-link">
+                <span>Beranda</span>
+              </a>
+            </li>
+            <li class="nav-item" style="cursor: pointer;">
+              <a data-bs-toggle="collapse" href="#collapseAnalis" class="<?=isActiveSubMenu(["perbandingan", "kriteria"])?> nav-link">
+                <span>Analis</span>
+              </a>
+              <div id="collapseAnalis" class="collapse">
+                <ul class="nav nav-pills flex-column mb-auto" style="padding-left: 20px">
+                  <li class="nav-item">
+                    <a href="<?=$app_root?>/dashboard.php?page=kriteria" class="<?=isActiveMenu("kriteria")?> nav-link">
+                      <span>Kriteria</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?=$app_root?>/dashboard.php?page=perbandingan" class="<?=isActiveMenu("perbandingan")?> nav-link">
+                      <span>Perbandingan</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="<?=$app_root?>/dashboard.php?page=pengajuan" class="<?=isActiveMenu("pengajuan")?> nav-link">
+                <span>Pengajuan</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -70,6 +106,10 @@ function isActiveMenu($key) {
           case 'pengajuan-detail':
             include "./pages/credit/pengajuan_detail.php";
             break;
+
+          case 'perbandingan':
+            include "./pages/credit/perbandingan.php";
+            break;
           
           default:
             # code...
@@ -79,5 +119,9 @@ function isActiveMenu($key) {
       </div>
     </div>
   </div>
+
+  <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/popper.js"></script>
+  <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
 </body>
 </html>
