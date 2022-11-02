@@ -78,19 +78,19 @@
       <div class="mb-3 row">
         <label class="form-label col-sm-2">Kemampuan</label>
         <div class="col-sm-10">
-          <input type="number" name="kemampuan" class="form-control">
+          <input type="text" name="kemampuan" class="money form-control">
         </div>
       </div>
       <div class="mb-3 row">
         <label class="form-label col-sm-2">Nilai Jaminan</label>
         <div class="col-sm-10">
-          <input type="number" name="njaminan" class="form-control">
+          <input type="text" name="njaminan" class="money form-control">
         </div>
       </div>
       <div class="mb-3 row">
         <label class="form-label col-sm-2">Pinjaman</label>
         <div class="col-sm-10">
-          <input type="number" name="pinjaman" class="form-control">
+          <input type="text" name="pinjaman" class="money form-control">
         </div>
       </div>
       <div class="mb-3 row">

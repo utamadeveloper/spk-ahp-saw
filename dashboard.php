@@ -53,7 +53,7 @@ function isActiveSubMenu($keys) {
             </li>
             <li class="nav-item" style="cursor: pointer;">
               <a data-bs-toggle="collapse" href="#collapseAnalis" class="<?=isActiveSubMenu(["perbandingan", "kriteria"])?> nav-link">
-                <span>Analis</span>
+                <span>Data Analis</span>
               </a>
               <div id="collapseAnalis" class="collapse">
                 <ul class="nav nav-pills flex-column mb-auto" style="padding-left: 20px">
@@ -64,7 +64,7 @@ function isActiveSubMenu($keys) {
                   </li>
                   <li class="nav-item">
                     <a href="<?=$app_root?>/dashboard.php?page=perbandingan" class="<?=isActiveMenu("perbandingan")?> nav-link">
-                      <span>Perbandingan</span>
+                      <span>Metode Analis</span>
                     </a>
                   </li>
                 </ul>
@@ -72,7 +72,7 @@ function isActiveSubMenu($keys) {
             </li>
             <li class="nav-item">
               <a href="<?=$app_root?>/dashboard.php?page=pengajuan" class="<?=isActiveMenu("pengajuan")?> nav-link">
-                <span>Pengajuan</span>
+                <span>Data Pengajuan</span>
               </a>
             </li>
           </ul>
@@ -121,7 +121,9 @@ function isActiveSubMenu($keys) {
   </div>
 
   <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/jquery.mask.min.js"></script>
   <script type="text/javascript" src="./assets/js/popper.js"></script>
   <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
 </body>
 </html>

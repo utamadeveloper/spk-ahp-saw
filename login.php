@@ -17,7 +17,7 @@ include "./config/database.php";
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/main.css">
 </head>
-<body class="d-flex justify-content-center align-items-center">
+<body class="d-flex justify-content-center align-items-center" style="height: 100%">
   <form action="<?=$app_root?>/actions/auth/login.php" method="POST">
     <?php if ($_SESSION["error"]) { ?>
     <div class="alert alert-danger" role="alert">
