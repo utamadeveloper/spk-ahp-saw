@@ -4,3 +4,4 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $app_root = "/spk-ahp-saw";
+$bunga = (float) 200000;

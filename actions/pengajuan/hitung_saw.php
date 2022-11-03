@@ -30,10 +30,17 @@ function perhitunganSAW($in_idpengajuan) {
   }
 
   // Pengajuan
+  // Bunga ada di config/global.php
   $q_pengajuan = "
     SELECT 
       pengajuan.*, 
-      nasabah.nmnasabah
+      nasabah.nmnasabah,
+      (
+        SELECT ROUND((((pengajuan.pinjaman / pengajuan.jangkawkt) + $bunga) / pengajuan.kemampuan) * 100)
+      ) AS persen_kemampuan,
+      (
+        SELECT ROUND((pengajuan.pinjaman / pengajuan.njaminan) * 100)
+      ) AS persen_pinjaman
     FROM pengajuan
     INNER JOIN nasabah ON nasabah.id_nasabah = pengajuan.id_nasabah
     WHERE pengajuan.idpengajuan = '$in_idpengajuan'
@@ -46,10 +53,7 @@ function perhitunganSAW($in_idpengajuan) {
   $in_values = [];
   
   // Kemampuan
-  $bunga = (float) 200000;
-  $angsuran_perbulan = (float) $d_pengajuan['pinjaman'] / (int) $d_pengajuan['jangkawkt'];
-  $hitung_persen = (($angsuran_perbulan + $bunga) / (float) $d_pengajuan['kemampuan']) * 100;
-  $persen_kemampuan = (float) number_format($hitung_persen, 0, '.', '');
+  $persen_kemampuan = (float) $d_pengajuan['persen_kemampuan'];
   if ($persen_kemampuan <= 29) {
     $in_values['kemampuan'] = 1;
   }
@@ -97,8 +101,7 @@ function perhitunganSAW($in_idpengajuan) {
   }
 
   // Pinjaman
-  $hitung_persen = ((float) $d_pengajuan['pinjaman'] / (float) $d_pengajuan['njaminan']) * 100;
-  $persen_pinjaman = (float) number_format($hitung_persen, 0, '.', '');
+  $persen_pinjaman = (float) $d_pengajuan['persen_pinjaman'];
   if ($persen_pinjaman <= 19) {
     $in_values['pinjaman'] = 14;
   }

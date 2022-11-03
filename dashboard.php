@@ -70,9 +70,16 @@ function isActiveSubMenu($keys) {
                 </ul>
               </div>
             </li>
+            <?php if ($_SESSION["auth"]["tipe"] == 1) { ?>
             <li class="nav-item">
               <a href="<?=$app_root?>/dashboard.php?page=pengajuan" class="<?=isActiveMenu("pengajuan")?> nav-link">
                 <span>Data Pengajuan</span>
+              </a>
+            </li>
+            <?php } ?>
+            <li class="nav-item">
+              <a href="<?=$app_root?>/dashboard.php?page=laporan" class="<?=isActiveMenu("laporan")?> nav-link">
+                <span>Laporan</span>
               </a>
             </li>
           </ul>
@@ -105,6 +112,10 @@ function isActiveSubMenu($keys) {
 
           case 'perbandingan':
             include "./pages/perbandingan.php";
+            break;
+
+          case 'laporan':
+            include "./pages/laporan.php";
             break;
           
           default:
