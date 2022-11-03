@@ -16,47 +16,85 @@ if (!$stmt_old) {
   die();
 }
 
-$in_values = [];
-
 // i = baris
 // j = kolom
+$in_data = [];
+
+// Menghitung kriteria 1,2,3,4,5
+for ($i=1; $i <= 5; $i++) {   
+  for ($j=1; $j <= 5; $j++) {
+    $baris = (float) $_POST["k".$i."k".$j];
+    $kolom = (float) $_POST["k".$j."k".$i];
+    $in_data[$i]['k'.$j] = $kolom;
+  }
+}
+
+// Menghitung total kolom
+for ($i=1; $i <= 5; $i++) { 
+  $hitung_total = (float) 0.00;
+  for ($j=1; $j <= 5; $j++) {
+    $baris = (float) $_POST["k".$i."k".$j];
+    $kolom = (float) $_POST["k".$j."k".$i];
+    if ($kolom !== '') {
+      $hitung_total += $kolom;
+    }
+  }
+  $in_data[$i]['total'] = (float) number_format($hitung_total, 2, '.', '');
+}
+
+// Menghitung nilai rata-rata (kolom/total)
+for ($i=1; $i <= 5; $i++) {
+  for ($j=1; $j <= 5; $j++) {
+    $baris = (float) $_POST["k".$i."k".$j];
+    $kolom = (float) $_POST["k".$j."k".$i];
+    $in_data[$j]['r'.$i] = (float) number_format(($kolom / $in_data[$i]['total']), 3, '.', '');
+  }
+}
+
+// Menghitung Eigen Vektor Normalisasi
+for ($i=1; $i <= 5; $i++) {
+  $hitung_total = (float) 0.00;
+  for ($j=1; $j <= 5; $j++) {
+    $nilai = $in_data[$i]['r'.$j];
+    $hitung_total += $nilai;
+  }
+  $in_data[$i]['evn'] = (float) number_format(($hitung_total / 5), 3, '.', '');
+}
 
 // Perhitungan lambda max
 $lambda_max = (float) 0;
 for ($i=1; $i <= 5; $i++) { 
-  $in_total = $_POST["totalk".$i];
-  $in_evn = $_POST["evnk".$i];
-  $lambda_max += (float) $in_total * (float) $in_evn;
+  $total = $in_data[$i]['total'];
+  $evn = $in_data[$i]['evn'];
+  $lambda_max += (float) $total * (float) $evn;
 }
 
-for ($i=1; $i <= 5; $i++) { 
-  $in_total = $_POST["totalk".$i];
-  $in_evn = $_POST["evnk".$i];
-  $in_k = [];
-  
-  // Generate SQL values K1,K2,K3,K4,K5
-  for ($j=1; $j <= 5; $j++) {
-    $in_kolom = $_POST["k".$j."k".$i];
-    array_push($in_k, $in_kolom);
-  } 
+// Perhitungan nilai CI dan CR
+$jumlah_kriteria = 5;
+$random_index = (float) 1.22;
+for ($i=1; $i <= 5; $i++) {
+  $ci = (float) ($lambda_max-$jumlah_kriteria)/($jumlah_kriteria-1);
+  $cr = (float) $ci / $random_index;
+  $in_data[$i]['ci'] = (float) number_format($ci, 3, '.', '');
+  $in_data[$i]['cr'] = (float) number_format($cr, 3, '.', '');
+}
 
-  // Perhitungan CI
-  $jumlah_kriteria = 5;
-  $in_ci = (float) ($lambda_max-$jumlah_kriteria)/($jumlah_kriteria-1);
-  
-  // Perhitungan CR
-  $random_index = (float) 1.22;
-  $in_cr = (float) $in_ci / $random_index;
-
+// Generate values insert
+$in_values = [];
+for ($i=1; $i <= 5; $i++) {
   // Generate SQL values insert
   array_push($in_values, "
     (
       $i,
-      ".implode(", ", $in_k).",
-      $in_total,
-      $in_evn,
-      $in_ci,
-      $in_cr
+      '".$in_data[$i]['k1']."',
+      '".$in_data[$i]['k2']."',
+      '".$in_data[$i]['k3']."',
+      '".$in_data[$i]['k4']."',
+      '".$in_data[$i]['k5']."',
+      '".$in_data[$i]['total']."',
+      '".$in_data[$i]['evn']."',
+      '".$in_data[$i]['ci']."',
+      '".$in_data[$i]['cr']."'
     )
   ");
 }
