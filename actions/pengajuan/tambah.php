@@ -42,9 +42,9 @@ if (!$stmt_nasabah) {
 }
 
 $in_id_nasabah = $conn->insert_id;
-$in_kemampuan = $_POST["kemampuan"];
-$in_njaminan = $_POST["njaminan"];
-$in_pinjaman = $_POST["pinjaman"];
+$in_kemampuan = (float) str_replace(',', '.', str_replace('.', '', $_POST["kemampuan"]));
+$in_njaminan = (float) str_replace(',', '.', str_replace('.', '', $_POST["njaminan"]));
+$in_pinjaman = (float) str_replace(',', '.', str_replace('.', '', $_POST["pinjaman"]));
 $in_karakter = $_POST["karakter"];
 $in_jangkawkt = $_POST["jangkawkt"];
 $in_jnskredit = $_POST["jnskredit"];
@@ -53,7 +53,6 @@ $in_tglpengajuan = date('Y-m-d H:i:s');
 $q_pengajuan = "
   INSERT INTO pengajuan
   (
-    idhasil,
     id_nasabah,
     kemampuan,
     njaminan,
@@ -65,7 +64,6 @@ $q_pengajuan = "
   )
   VALUES
   (
-    NULL,
     '$in_id_nasabah',
     '$in_kemampuan',
     '$in_njaminan',

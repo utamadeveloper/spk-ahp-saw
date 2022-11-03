@@ -2,8 +2,6 @@
 include "./config/global.php";
 include "./config/database.php";
 
-$_SESSION["error"] = null;
-
 $in_idpengajuan = $_GET['idpengajuan'] ?? '';
 
 $q_detail = "

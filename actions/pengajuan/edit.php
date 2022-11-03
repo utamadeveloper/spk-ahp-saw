@@ -41,13 +41,13 @@ $stmt_nasabah = $conn->query($q_nasabah);
 
 if (!$stmt_nasabah) {
   $_SESSION["error"] = "Gagal mengedit nasabah!\n$q_nasabah";
-  header("Location: $app_root/dashboard.php?page=pengajuan-edit");
+  header("Location: $app_root/dashboard.php?page=pengajuan-edit&idpengajuan=$in_idpengajuan");
   die();
 }
 
-$in_kemampuan = $_POST["kemampuan"];
-$in_njaminan = $_POST["njaminan"];
-$in_pinjaman = $_POST["pinjaman"];
+$in_kemampuan = (float) str_replace(',', '.', str_replace('.', '', $_POST["kemampuan"]));
+$in_njaminan = (float) str_replace(',', '.', str_replace('.', '', $_POST["njaminan"]));
+$in_pinjaman = (float) str_replace(',', '.', str_replace('.', '', $_POST["pinjaman"]));
 $in_karakter = $_POST["karakter"];
 $in_jangkawkt = $_POST["jangkawkt"];
 $in_jnskredit = $_POST["jnskredit"];
@@ -68,7 +68,7 @@ $stmt_pengajuan = $conn->query($q_pengajuan);
 
 if (!$stmt_pengajuan) {
   $_SESSION["error"] = "Gagal mengedit pengajuan!\n$q_pengajuan";
-  header("Location: $app_root/dashboard.php?page=pengajuan-edit");
+  header("Location: $app_root/dashboard.php?page=pengajuan-edit&idpengajuan=$in_idpengajuan");
   die();
 }
 
