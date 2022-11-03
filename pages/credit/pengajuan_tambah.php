@@ -129,7 +129,7 @@
             <?php
               foreach ($d_opsi_jangka_waktu as $key => $value) {
             ?>
-            <option value="<?=$value['nilaik']?>"><?=$value['ketkriteria']?></option>
+            <option value="<?=$value['ketkriteria']?>"><?=$value['ketkriteria']?></option>
             <?php
               }
             ?>

@@ -1,6 +1,7 @@
 <?php
 include "../../config/global.php";
 include "../../config/database.php";
+include "./penilaian.php";
 
 $in_nmnasabah = $_POST["nmnasabah"];
 $in_jk = $_POST["jk"];
@@ -82,6 +83,9 @@ if (!$stmt_pengajuan) {
   header("Location: $app_root/dashboard.php?page=pengajuan-tambah");
   die();
 }
+
+$in_idpengajuan = $conn->insert_id;
+perhitunanSAW($in_idpengajuan);
 
 $_SESSION["error"] = null;
 header("Location: $app_root/dashboard.php?page=pengajuan");
