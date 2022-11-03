@@ -33,20 +33,20 @@
     <tbody>
       <?php
         $row_len = 0;
-        while($row = $stmt_tabel->fetch_assoc()) {
+        foreach ($d_tabel as $key => $value) {
           $row_len++;
       ?>
       <tr>
-        <th class="text-start"><?=$row["tglpengajuan"]?></th>
-        <td class="text-start"><?=$row["id_nasabah"]?></td>
-        <td class="text-start"><?=$row["nmnasabah"]?></td>
-        <td class="text-end"><?=number_format($row["pinjaman"],0,",",".")?></td>
+        <td class="text-start"><?=$value["tglpengajuan"]?></td>
+        <td class="text-start"><?=$value["id_nasabah"]?></td>
+        <td class="text-start"><?=$value["nmnasabah"]?></td>
+        <td class="text-end"><?=number_format($value["pinjaman"],0,",",".")?></td>
         <td class="d-flex align-items-center justify-content-center">
-          <a href="<?=$app_root?>/dashboard.php?page=pengajuan-edit&idpengajuan=<?=$row['idpengajuan']?>" class="btn btn-warning mx-1">
+          <a href="<?=$app_root?>/dashboard.php?page=pengajuan-edit&idpengajuan=<?=$value['idpengajuan']?>" class="btn btn-warning mx-1">
             Edit
           </a>
           <form action="<?=$app_root?>/actions/pengajuan/hapus.php" method="POST">
-            <input type="hidden" name="idpengajuan" value="<?=$row['idpengajuan']?>">
+            <input type="hidden" name="idpengajuan" value="<?=$value['idpengajuan']?>">
             <button type="submit" class="btn btn-danger mx-1" onclick="return confirm('Apakah anda yakin ingin mengghapus?')">
               Hapus
             </button>

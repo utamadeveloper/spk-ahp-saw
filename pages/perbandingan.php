@@ -1,5 +1,4 @@
 <?php
-  include "./middleware/credit.php";
   include "./actions/perbandingan/detail.php";
 ?>
 

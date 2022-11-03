@@ -1,5 +1,4 @@
 <?php
-  include "./middleware/credit.php";
 ?>
 
 <h3>Selamat datang, <?= $_SESSION["auth"]["nmpengguna"] ?></h3>

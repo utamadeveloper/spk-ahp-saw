@@ -86,29 +86,25 @@ function isActiveSubMenu($keys) {
 
         switch ($q_page) {
           case 'home':
-            if ($auth["tipe"] == 1) {
-              include "./pages/credit/home.php";
-            }
-            if ($auth["tipe"] == 2) {
-              include "./pages/manajer/home.php";
-            }
+            include "./pages/home.php";
             break;
-          
+
           case 'pengajuan':
-            include "./pages/credit/pengajuan.php";
+            include "./pages/pengajuan.php";
             break;
           case 'pengajuan-tambah':
-            include "./pages/credit/pengajuan_tambah.php";
+            include "./pages/pengajuan_tambah.php";
             break;
           case 'pengajuan-edit':
-            include "./pages/credit/pengajuan_edit.php";
+            include "./pages/pengajuan_edit.php";
             break;
-          case 'pengajuan-detail':
-            include "./pages/credit/pengajuan_detail.php";
+
+          case 'kriteria':
+            include "./pages/kriteria.php";
             break;
 
           case 'perbandingan':
-            include "./pages/credit/perbandingan.php";
+            include "./pages/perbandingan.php";
             break;
           
           default:
