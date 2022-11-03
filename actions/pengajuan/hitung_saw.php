@@ -1,5 +1,5 @@
 <?php
-function perhitunanSAW($in_idpengajuan) {
+function perhitunganSAW($in_idpengajuan) {
   include "../../config/global.php";
   include "../../config/database.php";
 

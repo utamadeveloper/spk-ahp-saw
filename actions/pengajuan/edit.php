@@ -1,7 +1,7 @@
 <?php
 include "../../config/global.php";
 include "../../config/database.php";
-include "./penilaian.php";
+include "./hitung_saw.php";
 
 $in_idpengajuan = $_POST['idpengajuan'] ?? null;
 
@@ -73,7 +73,7 @@ if (!$stmt_pengajuan) {
   die();
 }
 
-perhitunanSAW($d_old['idpengajuan']);
+perhitunganSAW($d_old['idpengajuan']);
 
 $_SESSION["error"] = null;
 header("Location: $app_root/dashboard.php?page=pengajuan");
